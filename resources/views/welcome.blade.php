@@ -63,6 +63,14 @@
             }
         </style>
     </head>
+
+    {{-- 
+    Dati per accesso:
+        leoloca98@yahoo.it
+        Classica
+     --}}
+@endauth
+
     <body>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
