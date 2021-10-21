@@ -19,7 +19,10 @@ Route::get('/', function () {
 
 Auth::routes(['register' => false]);
 
-Route::get('/admin', 'HomeController@index')->name('home');
+/* Raggruppiamo tutte le rotte di ADMIN */
+Route::middleware('auth')->name('admin.')->prefix('admin')->namespace('Admin')->group(function () {
+    Route::get('/', 'HomeController@index')->name('home');
+});
 
 
 
