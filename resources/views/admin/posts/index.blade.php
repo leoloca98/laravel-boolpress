@@ -17,7 +17,7 @@
                     <tr>
                         <td>{{ $post->id }}</td>
                         <td>{{ $post->title }}</td>
-                        <td>{{ $post->created_at }}</td>
+                        <td>{{ $post->getFormattedDate('created_at') }}</td>
                         <td><a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-primary">Vai</a></td>
                     </tr>
                 @empty
