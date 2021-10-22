@@ -16,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(10);
+        $posts = Post::orderBy('id', 'desc')->paginate(10);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -27,7 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create', ['post' => new Post()]);
     }
 
     /**
@@ -38,7 +38,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // ! Validazione
+
+        $data = $request->all();                                //Contiene tutti i dati inviati dal form
+
+        $post = new Post();
+        $post->fill($data);
+        $post->slug = Str::slug($post->title, '-');
+
+        $post->save();
+
+        return redirect()->route('admin.posts.show', compact('post'));
     }
 
     /**
@@ -58,9 +68,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -70,9 +80,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        // ! Validazione
+
+        $data = $request->all();                                //Contiene tutti i dati inviati dal form
+
+        $data['slug'] = Str::slug($data['title'], '-');
+
+        $post->update($data);
+
+        return redirect()->route('admin.posts.show', $post->id);
     }
 
     /**
