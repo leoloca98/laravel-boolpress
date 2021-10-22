@@ -1,0 +1,5 @@
+APPUNTI PER ESERCIZIO 'laravel-boolpress':
+
+COMMAND:
+- 'npm run dev' -> per compilare manualmente ogni volta
+- 'npm run watch' -> per far compilare a vs 

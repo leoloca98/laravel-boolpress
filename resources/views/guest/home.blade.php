@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}" type="text/css">
 
     <!-- Styles -->
-    {{-- <style>
+    <style>
         html,
         body {
             background-color: #fff;
@@ -63,30 +63,27 @@
             margin-bottom: 30px;
         }
 
-    </style> --}}
+    </style>
 </head>
 
 <body>
-    {{-- <div class="flex-center position-ref full-height">
+    <div class="full-height">
         @if (Route::has('login'))
             <div class="top-right links">
-                @auth
-                    <a href="{{ url('/admin') }}">Home</a>
-                @else
+                @guest
                     <a href="{{ route('login') }}">Login</a>
 
                     @if (Route::has('register'))
                         <a href="{{ route('register') }}">Register</a>
                     @endif
-                @endauth
+                @endguest
             </div>
         @endif
-    </div> --}}
 
-    {{-- Inseriamo VUE in laravel per il front-end --}}
-    <div id="root">Ciaone</div>
+        {{-- Inseriamo VUE in laravel per il front-end --}}
+        <div id="root">Siamo dentro Vue</div>
 
-    <script src="{{ assset('js/front.js') }}"></script>
+        <script src="{{ asset('js/front.js') }}"></script>
 </body>
 
 </html>

@@ -19,14 +19,18 @@ Route::get('/', function () {
 
 Auth::routes(['register' => false]);
 
+// Dati per accesso:
+//     leoloca98@yahoo.it
+//     Classica
+
 //* ROTTE ADMIN
 Route::middleware('auth')->name('admin.')->prefix('admin')->namespace('Admin')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('posts', 'PostController');
+    Route::get('/{any}', function () {
+        abort(404);
+    });
 });
-// Dati per accesso:
-//     leoloca98@yahoo.it
-//     Classica
 
 //* ROTTE PUBBLICHE
 Route::get('{any?}', function () {
