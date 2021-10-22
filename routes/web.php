@@ -19,15 +19,16 @@ Route::get('/', function () {
 
 Auth::routes(['register' => false]);
 
-/* Raggruppiamo tutte le rotte di ADMIN */
+//* ROTTE ADMIN
 Route::middleware('auth')->name('admin.')->prefix('admin')->namespace('Admin')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('posts', 'PostController');
 });
-
-
-
-
 // Dati per accesso:
 //     leoloca98@yahoo.it
 //     Classica
+
+//* ROTTE PUBBLICHE
+Route::get('{any?}', function () {
+    return view('guest.home');
+})->where('any', '.*');                 //Prendi qualunque tipo di carattere e in qualunque quantità (.*)
