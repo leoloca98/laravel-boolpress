@@ -49,6 +49,7 @@ class PostController extends Controller
             'min' => 'The minimum number of characters for the :attribute field is :min',
             'title.unique' => 'The title already exists'
         ]);
+        // !
 
         $data = $request->all();                                //Contiene tutti i dati inviati dal form
 
@@ -102,6 +103,7 @@ class PostController extends Controller
             'min' => 'The minimum number of characters for the :attribute field is :min',
             'title.unique' => 'The title already exists'
         ]);
+        // !
 
         $data = $request->all();                                //Contiene tutti i dati inviati dal form
 
