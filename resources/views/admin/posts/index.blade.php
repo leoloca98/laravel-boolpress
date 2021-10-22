@@ -50,15 +50,6 @@
     </div>
     @section('scripts')
         {{-- Funzione per chiedere la conferma dell'eliminazione --}}
-        <script>
-            const deleteButtons = document.querySelectorAll('.delete-button');
-            deleteButtons.forEach(btn => {
-                btn.addEventListener('submit', function(e) {
-                    const conf = confirm('Are you sure you want to delete this post?');
-                    if (conf) this.sumbit();
-                    else e.preventDefault();
-                });
-            });
-        </script>
+        <script src="{{ asset('js/confirm-delete.js') }}"></script>
     @endsection
 @endsection

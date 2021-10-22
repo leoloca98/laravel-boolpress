@@ -6,6 +6,7 @@ use App\Models\Post;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -39,6 +40,15 @@ class PostController extends Controller
     public function store(Request $request)
     {
         // ! Validazione
+        $request->validate([
+            'title' => 'required|string|unique:posts|min:5',
+            'content' => 'required|string|min:5'
+        ], [
+            'required' => 'The :attribute field is required',
+            'string' => 'The content entered in the :attribute field is not a string',
+            'min' => 'The minimum number of characters for the :attribute field is :min',
+            'title.unique' => 'The title already exists'
+        ]);
 
         $data = $request->all();                                //Contiene tutti i dati inviati dal form
 
@@ -83,6 +93,15 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         // ! Validazione
+        $request->validate([
+            'title' => ['required', 'string', Rule::unique('posts')->ignore($post->id), 'min:5'],
+            'content' => 'required|string|min:5'
+        ], [
+            'required' => 'The :attribute field is required',
+            'string' => 'The content entered in the :attribute field is not a string',
+            'min' => 'The minimum number of characters for the :attribute field is :min',
+            'title.unique' => 'The title already exists'
+        ]);
 
         $data = $request->all();                                //Contiene tutti i dati inviati dal form
 
