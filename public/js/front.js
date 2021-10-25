@@ -2045,8 +2045,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostList",
   components: {
-    Loader: _Loader_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    PostCard: _PostCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    PostCard: _PostCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Loader: _Loader_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -2065,6 +2065,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.posts = res.data;
       })["catch"](function (err) {
         console.error(err);
+      }).then(function () {
+        _this.isLoading = false;
       });
     }
   },
@@ -6529,7 +6531,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "#loader[data-v-e79ec684] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n#loader .spinner-border[data-v-e79ec684] {\n  width: 200px;\n  height: 200px;\n}", ""]);
+exports.push([module.i, ".loader[data-v-e79ec684] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: rgba(0, 0, 0, 0.5);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  z-index: 9;\n}\n.loader .spinner-border[data-v-e79ec684] {\n  width: 100px;\n  height: 100px;\n}", ""]);
 
 // exports
 
@@ -38494,14 +38496,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { attrs: { id: "loader" } }, [
+    return _c("div", { staticClass: "loader" }, [
       _c(
         "div",
         {
           staticClass: "spinner-border text-success",
           attrs: { role: "status" }
         },
-        [_c("span", { staticClass: "r-only" }, [_vm._v("Loading...")])]
+        [_c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])]
       )
     ])
   }
@@ -38581,11 +38583,11 @@ var render = function() {
     [
       _c("h2", [_vm._v("I miei post")]),
       _vm._v(" "),
-      _c("Loader"),
-      _vm._v(" "),
-      _vm._l(_vm.posts, function(post) {
-        return _c("PostCard", { key: post.id, attrs: { post: post } })
-      })
+      _vm.isLoading
+        ? _c("Loader")
+        : _vm._l(_vm.posts, function(post) {
+            return _c("PostCard", { key: post.id, attrs: { post: post } })
+          })
     ],
     2
   )

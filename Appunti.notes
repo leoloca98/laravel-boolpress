@@ -23,3 +23,24 @@ SEEDER:
 
         //     $newPost->save();
         // }
+
+
+RELAZIONI:
+Per gestire la foreign key usiamo ovviamente le migration.
+In poche parole creiamo una colonna dentro alla tabella dei "molti" a cui associamo una foreign key.
+Usiamo la funzione ->constrained() solo se voglia seguire le convenzioni. (non possiamo modificare il nome della tabella ne la referenza)
+Le relazioni si mettono tra modelli. Una volta fatto si creeranno anche nel database
+
+
+1) ONE-TO-ONE
+funzione ->hasOne() per definire che c'è solo una relazione
+funzione ->belongsTo() per definire la relazione inversa. Per definire la predominanza
+
+
+2) ONE-TO-MANY
+funzione ->hasMany() per definire la relazione uno a molti. (Relazione 1)
+funzione ->belongsTo() per definire la relazione inversa. (Relazione Molti)
+
+
+3) MANY-TO-MANY
+

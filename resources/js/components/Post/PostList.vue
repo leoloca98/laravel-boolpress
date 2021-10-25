@@ -1,8 +1,8 @@
 <template>
   <section id="post-list">
     <h2>I miei post</h2>
-    <Loader />
-    <PostCard v-for="post in posts" :key="post.id" :post="post" />
+    <Loader v-if="isLoading" />
+    <PostCard v-else v-for="post in posts" :key="post.id" :post="post" />
   </section>
 </template>
 
@@ -12,8 +12,8 @@ import Loader from "../Loader.vue";
 export default {
   name: "PostList",
   components: {
-    Loader,
     PostCard,
+    Loader,
   },
   data() {
     return {
@@ -33,6 +33,9 @@ export default {
         })
         .catch((err) => {
           console.error(err);
+        })
+        .then(() => {
+          this.isLoading = false;
         });
     },
   },
