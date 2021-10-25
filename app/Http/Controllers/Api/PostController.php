@@ -37,9 +37,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        return response()->json($post);
+        $post = Post::find($id);
+        if ($post) return response()->json($post);
+        else return response('', 404);
     }
 
     /**
@@ -62,6 +64,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::destroy($id);
+        return response('', 204);               //Operazione effettuata con successo (status 204)
     }
 }
