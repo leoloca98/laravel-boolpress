@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
         <h1>{{ $post->title }}</h1>
+        <p>Category: @if ($post->category){{ $post->category->name }} @else No Category @endif</p>
         <p>{{ $post->content }}</p>
         <address>{{ $post->getFormattedDate('created_at') }}</address>
         <div class="d-flex justify-content-end">

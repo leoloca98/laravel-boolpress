@@ -16,6 +16,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
+                    <th scope="col">Categories</th>
                     <th scope="col">Written at</th>
                     <th scope="col">Options</th>
                 </tr>
@@ -25,6 +26,13 @@
                     <tr>
                         <th scope="row">{{ $post->id }}</th>
                         <td>{{ $post->title }}</td>
+                        <td>
+                            @if ($post->category)
+                                <span class="badge badge-pill badge-info px-4">{{ $post->category->name }}</span>
+                            @else
+                                No Category
+                            @endif
+                        </td>
                         <td>{{ $post->getFormattedDate('created_at') }}</td>
                         <td class="d-flex justify-content-center">
                             <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-primary">Go</a>

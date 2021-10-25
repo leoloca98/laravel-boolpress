@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -28,7 +29,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create', ['post' => new Post()]);
+        $post = new Post();
+        $categories = Category::all();
+        return view('admin.posts.create', compact('post', 'categories'));
     }
 
     /**
@@ -42,7 +45,8 @@ class PostController extends Controller
         // ! Validazione
         $request->validate([
             'title' => 'required|string|unique:posts|min:5',
-            'content' => 'required|string|min:5'
+            'content' => 'required|string|min:5',
+            'category_id' => 'nullable|exists:categories,id'
         ], [
             'required' => 'The :attribute field is required',
             'string' => 'The content entered in the :attribute field is not a string',
@@ -81,7 +85,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $categories = Category::all();
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -96,7 +101,8 @@ class PostController extends Controller
         // ! Validazione
         $request->validate([
             'title' => ['required', 'string', Rule::unique('posts')->ignore($post->id), 'min:5'],
-            'content' => 'required|string|min:5'
+            'content' => 'required|string|min:5',
+            'category_id' => 'nullable|exists:categories,id'
         ], [
             'required' => 'The :attribute field is required',
             'string' => 'The content entered in the :attribute field is not a string',
