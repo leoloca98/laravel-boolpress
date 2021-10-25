@@ -18,10 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/test', function () {
-    return response()->json([
-        'students' => ['cristina', 'alessandro', 'damiano', 'rocco'],
-        'teacher' => 'Marco',
-        'total' => 32
-    ]);
+//# API ROUTE
+Route::namespace('Api')->group(function () {
+    Route::resource('posts', 'PostController');     //Potrebbero anche esistere solo le rotte api(no resource perchè mette anche edit e create che non verranno mai usate)(controllare su documentazione)
 });
