@@ -20,5 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //# API ROUTE
 Route::namespace('Api')->group(function () {
-    Route::resource('posts', 'PostController');     //Potrebbero anche esistere solo le rotte api(no resource perchè mette anche edit e create che non verranno mai usate)(controllare su documentazione)
+    // Route::resource('posts', 'PostController');     //Potrebbero anche esistere solo le rotte api(no resource perchè mette anche edit e create che non verranno mai usate)(controllare su documentazione)
+    Route::get('/posts', 'PostController@index');
 });

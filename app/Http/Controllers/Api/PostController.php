@@ -16,7 +16,6 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-
         return response()->json($posts);    //Se abbiamo una collection di eloquent possiamo mandare direttamente la collection
     }
 

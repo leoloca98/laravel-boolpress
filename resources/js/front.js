@@ -6,6 +6,8 @@
 
 require('./bootstrap');                     //Porta Bootstrap
 
+window.axios = require('axios');            //Porta Axios (globalmente a tutti i file js del front-end)
+
 window.Vue = require('vue');                //Porta Vue
 
 import App from './components/App.vue';     //Importa il componente App.vue

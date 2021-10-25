@@ -1,27 +1,21 @@
 <template>
   <div class="container">
-    <div class="row justify-content-center mt-5">
-      <div class="col-md-8">
-        <div class="card">
-          <Header :title="title" />
-          <div class="card-body">Under Construction</div>
-          <!-- <PostsPage /> -->
-          <!-- <PostDetailPage /> -->
-        </div>
-      </div>
-    </div>
+    <Header :title="title" />
+    <PostList />
   </div>
 </template>
 
 <script>
 import Header from "./Header.vue";
+import PostList from "./Post/PostList.vue";
 export default {
   name: "App",
   data() {
-    return { title: "My Blog" };
+    return { title: "My Blog" }; //Nome del progetto, dinamico
   },
   components: {
     Header,
+    PostList,
   },
 };
 </script>

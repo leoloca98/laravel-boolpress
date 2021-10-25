@@ -1,5 +1,5 @@
 <template>
-  <div class="card-header">Welcome to {{ title }}</div>
+  <h1>Welcome to {{ title }}</h1>
 </template>
 
 <script>
@@ -9,5 +9,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+h1 {
+  color: goldenrod;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+}
 </style>
