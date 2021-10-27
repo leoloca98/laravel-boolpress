@@ -17,11 +17,7 @@ Route::get('/', function () {
     return view('guest.home');
 });
 
-Auth::routes(['register' => true]);
-
-// Dati per accesso:
-//     leoloca98@yahoo.it
-//     Classica
+Auth::routes();
 
 //* ROTTE ADMIN
 Route::middleware('auth')->name('admin.')->prefix('admin')->namespace('Admin')->group(function () {

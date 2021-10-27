@@ -3,6 +3,7 @@
 use App\Models\Post;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
+use App\User;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;                //D'ora in poi posso chiamarla Faker anzichè chiamarla Generator
 use App\Models\Category;
@@ -21,11 +22,13 @@ class PostsTableSeeder extends Seeder
         //* USIAMO UN FAKER PER GENERARE I POST
 
         $categories_id = Category::select('id')->pluck('id')->toArray();
+        $user_ids = User::pluck('id')->toArray();
 
         for ($i = 0; $i < 50; $i++) {
             $post = new Post();
 
             $post->category_id = Arr::random($categories_id);
+            $post->user_id = Arr::random($user_ids);
             $post->title = $faker->text(50);
             $post->content = $faker->paragraphs(2, true);
             $post->slug = Str::slug($post->title, '-');

@@ -46,6 +46,22 @@
         </div>
     @enderror
 </div>
+{{-- Tags --}} {{-- Occhio alla validazione che ho messo che potrebbe aver rotto tutto --}}
+<fieldset class="mb-4">
+    <p>Tags</p>
+    @foreach ($tags as $tag)
+        <div class="form-check form-check-inline">
+            <input class="form-check-input  @error('tag_id') is-invalid @enderror" type="checkbox"
+                id="tag-{{ $tag->id }}" value="{{ $tag->id }}" name="tags[]" @if (in_array($tag->id, old('tags', $tagIds ?? [])))  checked @endif>
+            <label class="form-check-label" for="tag-{{ $tag->id }}">{{ $tag->name }}</label>
+        </div>
+    @endforeach
 
+    @error('tag_id')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+    @enderror
+</fieldset>
 <button type="sumbit" class="btn btn-success">Save</button>
 </form>

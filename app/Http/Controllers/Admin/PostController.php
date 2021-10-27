@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\User;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -20,8 +20,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $user = User::find(1);
-        dd($user->info->adress);
+        // $user = User::find(1);
+        // dd($user->info->adress);
 
         $categories = Category::all();
         $posts = Post::orderBy('id', 'desc')->paginate(10);
@@ -37,7 +37,8 @@ class PostController extends Controller
     {
         $post = new Post();
         $categories = Category::all();
-        return view('admin.posts.create', compact('post', 'categories'));
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('tags', 'post', 'categories'));
     }
 
     /**
@@ -52,7 +53,8 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string|unique:posts|min:5',
             'content' => 'required|string|min:5',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id'
         ], [
             'required' => 'The :attribute field is required',
             'string' => 'The content entered in the :attribute field is not a string',
@@ -69,6 +71,9 @@ class PostController extends Controller
         $post->slug = Str::slug($post->title, '-');
 
         $post->save();
+
+        //Se ho dei tags creo la relazione
+        if (array_key_exists('tags', $data)) $post->tags()->attach($data['tags']);
 
         return redirect()->route('admin.posts.show', compact('post'));
     }
@@ -92,11 +97,12 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        // $tags = Tag::all();
+        $tags = Tag::all();
         $categories = Category::all();
 
-        // $tags_ids=$post->tags
-        return view('admin.posts.edit', compact('post', 'categories'));
+        //Recupero l'id del post che voglio editare e salvo i tag in un array
+        $tagIds = $post->tags->pluck('id')->toArray();
+        return view('admin.posts.edit', compact('tags', 'post', 'tagIds', 'categories'));
     }
 
     /**

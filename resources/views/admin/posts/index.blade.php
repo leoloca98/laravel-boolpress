@@ -17,6 +17,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
                     <th scope="col">Categories</th>
+                    <th scope="col">Tags</th>
                     <th scope="col">Author</th>
                     <th scope="col">Written at</th>
                     <th scope="col">Options</th>
@@ -33,6 +34,13 @@
                                     class="badge badge-pill badge-{{ $post->category->color ?? light }} px-2">{{ $post->category->name }}</span>
                             @else -
                             @endif
+                        </td>
+                        <td>
+                            @forelse ($post->tags as $tag)
+                                <span class="badge badge-pill px-2"
+                                    style="background-color: {{ $tag->color }}">{{ $tag->name }}</span>
+                            @empty -
+                            @endforelse
                         </td>
                         <td>@if ($post->author) {{ $post->author->name }} @else Anonymous @endif</td>
                         <td>{{ $post->getFormattedDate('created_at') }}</td>

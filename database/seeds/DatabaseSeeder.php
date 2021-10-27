@@ -11,6 +11,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([CategoriesTableSeeder::class, PostsTableSeeder::class]);
+        $this->call(
+            [
+                CategoriesTableSeeder::class,
+                UsersTableSeeder::class,
+                TagsTableSeeder::class,
+                PostsTableSeeder::class                 //E' la relazione più debole, quindi sta all'ulitmo
+            ]
+        );
     }
 }
