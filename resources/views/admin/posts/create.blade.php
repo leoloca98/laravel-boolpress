@@ -9,7 +9,7 @@
         </header>
 
         <main>
-            @include('includes.admin.form') {{-- //! Attenzione all'indirizzo --}}
+            @include('includes.admin.posts.form') {{-- //! Attenzione all'indirizzo --}}
         </main>
     </div>
 @endsection

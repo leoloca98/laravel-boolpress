@@ -43,4 +43,3 @@ funzione ->belongsTo() per definire la relazione inversa. (Relazione Molti)
 
 
 3) MANY-TO-MANY
-

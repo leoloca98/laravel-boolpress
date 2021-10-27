@@ -34,13 +34,17 @@
 {{-- Category --}}
 <div class="form-group">
     <label for="category_id">Select Category</label>
-    <select class="form-control" id="category_id" name="category_id">
-        <option>No Category</option>
+    <select class="form-control @error('category_id') is-invalid @enderror" id="category_id" name="category_id">
+        <option value="">No Category</option>
         @foreach ($categories as $category)
             <option @if (old('category_id', $post->category_id) == $category->id) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
         @endforeach
-
     </select>
+    @error('category_id')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+    @enderror
 </div>
 
 <button type="sumbit" class="btn btn-success">Save</button>

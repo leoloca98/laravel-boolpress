@@ -63,6 +63,9 @@
                                     <a class="dropdown-item" href="{{ route('admin.posts.index') }}">
                                         {{ __('My Post') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('admin.categories.index') }}">
+                                        {{ __('My Categories') }}
+                                    </a>
 
                                     <form id=" logout-form" action="{{ route('logout') }}" method="POST"
                                         class="d-none">
@@ -87,7 +90,7 @@
     </div>
 
     @yield('scripts')
-    
+
 </body>
 
 </html>
