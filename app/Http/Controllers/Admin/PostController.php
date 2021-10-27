@@ -118,7 +118,8 @@ class PostController extends Controller
         $request->validate([
             'title' => ['required', 'string', Rule::unique('posts')->ignore($post->id), 'min:5'],
             'content' => 'required|string|min:5',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id'
         ], [
             'required' => 'The :attribute field is required',
             'string' => 'The content entered in the :attribute field is not a string',
@@ -130,6 +131,9 @@ class PostController extends Controller
         $data = $request->all();                                //Contiene tutti i dati inviati dal form
 
         $data['slug'] = Str::slug($data['title'], '-');
+        //Se ho dei tags creo la relazione
+        if (!array_key_exists('tags', $data)) $post->tags()->detach();
+        else $post->tags()->sync($data['tags']);
 
         $post->update($data);
 
