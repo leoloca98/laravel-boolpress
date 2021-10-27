@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -18,6 +20,9 @@ class PostController extends Controller
      */
     public function index()
     {
+        $user = User::find(1);
+        dd($user->info->adress);
+
         $categories = Category::all();
         $posts = Post::orderBy('id', 'desc')->paginate(10);
         return view('admin.posts.index', compact('posts', 'categories'));
@@ -59,6 +64,7 @@ class PostController extends Controller
         $data = $request->all();                                //Contiene tutti i dati inviati dal form
 
         $post = new Post();
+        $data['user_id'] = Auth::id();
         $post->fill($data);
         $post->slug = Str::slug($post->title, '-');
 

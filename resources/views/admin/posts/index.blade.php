@@ -17,6 +17,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
                     <th scope="col">Categories</th>
+                    <th scope="col">Author</th>
                     <th scope="col">Written at</th>
                     <th scope="col">Options</th>
                 </tr>
@@ -33,6 +34,7 @@
                             @else -
                             @endif
                         </td>
+                        <td>@if ($post->author) {{ $post->author->name }} @else Anonymous @endif</td>
                         <td>{{ $post->getFormattedDate('created_at') }}</td>
                         <td class="d-flex justify-content-center">
                             <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-primary">Go</a>
