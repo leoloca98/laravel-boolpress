@@ -43,3 +43,4 @@ funzione ->belongsTo() per definire la relazione inversa. (Relazione Molti)
 
 
 3) MANY-TO-MANY
+funzione ->belongsToMany() ad entrambi i model per definire questo tipo di relation
